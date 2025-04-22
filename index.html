@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Character Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            display: none;
+        }
+
+        #character-description {
+            white-space: pre-line;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Fantasy Character Creator</h1>
+    <p style="text-align: center;">Answer the questions below to reveal your unique fantasy creature.</p>
+
+    <form id="char-form">
+        <div class="section">
+            <h2>Power & Purpose</h2>
+
+            <div class="question">
+                <label>A battle looms, and the war council looks to you for guidance.
+                    How do you respond?</label>
+                <select id="leadership">
+                    <option value="1">Take full control</option>
+                    <option value="2">Take a leading role</option>
+                    <option value="3">Openly speak my opinion</option>
+                    <option value="4">Share my views during open discussion</option>
+                    <option value="5">Encourage others to speak up</option>
+                    <option value="6">Act on behalf of those who cannot act for themselves</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>The village's food stores are running low, and the people are hungry.
+                    How do you handle the remaining supplies?</label>
+                <select id="resource">
+                    <option value="1">Secure for self</option>
+                    <option value="2">Lean towards securing for self</option>
+                    <option value="3">Take more than my share</option>
+                    <option value="4">Take only my share</option>
+                    <option value="5">Lean towards even distribution</option>
+                    <option value="6">Distribute everything evenly</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>A mysterious map promises great fortune—but also great danger.
+                    Do you take the risk?</label>
+                <select id="risk">
+                    <option value="1">Take risks for greater power</option>
+                    <option value="2">Leans toward risk-taking</option>
+                    <option value="3">Takes 'safe' risks</option>
+                    <option value="4">Doesn't willingly take risks</option>
+                    <option value="5">Is overly cautious</option>
+                    <option value="6">Completely avoid risk</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Wisdom & Adaptation</h2>
+
+            <div class="question">
+                <label>The enemy strikes unexpectedly, and there's no time to plan.
+                    How do you decide your next move?</label>
+                <select id="decision">
+                    <option value="1">Rely fully on past experience</option>
+                    <option value="2">Trust proven strategies</option>
+                    <option value="3">Weigh both experience and innovation</option>
+                    <option value="4">Experiment cautiously</option>
+                    <option value="5">Try new approaches frequently</option>
+                    <option value="6">Rely heavily on new ideas and change</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>You enter a land unlike any you've seen before, with customs and dangers unknown.
+                    How do you navigate the unfamiliar?</label>
+                <select id="uncertainty">
+                    <option value="1">Stick with proven methods</option>
+                    <option value="2">Lean towards familiar territory</option>
+                    <option value="3">Choose stability with some flexibility</option>
+                    <option value="4">Try new paths occasionally</option>
+                    <option value="5">Embrace change regularly</option>
+                    <option value="6">Seek out the unfamiliar and unknown</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>Your latest endeavor ends in failure.
+                    What lesson do you take from it?</label>
+                <select id="failure">
+                    <option value="1">Reflect deeply and gain wisdom</option>
+                    <option value="2">Analyze thoroughly before moving forward</option>
+                    <option value="3">Balance reflection with adaptation</option>
+                    <option value="4">Adapt quickly but learn somewhat</option>
+                    <option value="5">Move on without much reflection</option>
+                    <option value="6">Avoid reflection entirely, focus on moving forward</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Connection & Impact</h2>
+
+            <div class="question">
+                <label>A stranger seeks your friendship,
+                    offering loyalty in return. What kind of bond do you form?</label>
+                <select id="relationships">
+                    <option value="1">Focus fully on deep, lasting bonds</option>
+                    <option value="2">Prioritize close, meaningful relationships</option>
+                    <option value="3">Balance between
+                        deep and broad connections</option>
+                    <option value="4">Enjoy broader, social relationships</option>
+                    <option value="5">Prefer casual and fleeting interactions</option>
+                    <option value="6">Keep most connections distant or surface-level</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>The people look to you as a leader, even when you didn't ask for it.
+                    How do you wield your influence?</label>
+                <select id="influence">
+                    <option value="1">Actively aim for lasting influence</option>
+                    <option value="2">Frequently seek to make an impact</option>
+                    <option value="3">Contribute meaningfully when possible</option>
+                    <option value="4">Prefer small, quiet contributions</option>
+                    <option value="5">Rarely seek to influence others</option>
+                    <option value="6">Prefer to remain in the background</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>A beggar collapses at your feet, desperate for aid.
+                    How do you respond?</label>
+                <select id="compassion">
+                    <option value="1">Take immediate action to help</option>
+                    <option value="2">Offer consistent support</option>
+                    <option value="3">Balance empathy with action</option>
+                    <option value="4">Show compassion but avoid involvement</option>
+                    <option value="5">Feel sympathy but remain passive</option>
+                    <option value="6">Stay distant, feeling unaffected</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Action & Method</h2>
+
+            <div class="question">
+                <label>A mission must be completed, and time is short.
+                    Do you charge in or meticulously plan?</label>
+                <select id="execution">
+                    <option value="1">Strictly follow plans and methods</option>
+                    <option value="2">Favor structured strategies</option>
+                    <option value="3">Balance structure with flexibility</option>
+                    <option value="4">Use some planning, but adapt frequently</option>
+                    <option value="5">Prefer spontaneous, free-flowing action</option>
+                    <option value="6">Act impulsively without much planning</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>The king entrusts you with a delicate task requiring both care and speed.
+                    Which do you prioritize?</label>
+                <select id="work_ethic">
+                    <option value="1">Prioritize thoroughness and precision</option>
+                    <option value="2">Focus on detailed, careful execution</option>
+                    <option value="3">Balance accuracy and efficiency</option>
+                    <option value="4">Aim for efficiency with some attention to detail</option>
+                    <option value="5">Prioritize speed over precision</option>
+                    <option value="6">Rush to completion, sacrificing accuracy</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>You stand before an ancient puzzle.
+                    Do you solve it methodically or break it open?</label>
+                <select id="efficiency">
+                    <option value="1">Prioritize maximum efficiency</option>
+                    <option value="2">Lean towards productivity over creativity</option>
+                    <option value="3">Balance efficiency and creativity equally</option>
+                    <option value="4">Favor creative solutions with some efficiency</option>
+                    <option value="5">Lean towards creative exploration</option>
+                    <option value="6">Prioritize creativity, even if it reduces efficiency</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Truth & Identity</h2>
+
+            <div class="question">
+                <label>The ruling order asks
+                    you to forsake your beliefs for a place of power.
+                    Do you accept?</label>
+                <select id="authenticity">
+                    <option value="1">Stay fully authentic, no matter the cost</option>
+                    <option value="2">Prioritize authenticity over fitting in</option>
+                    <option value="3">Balance authenticity with social adaptation</option>
+                    <option value="4">Adapt occasionally but keep core values</option>
+                    <option value="5">Fit in regularly, authenticity comes second</option>
+                    <option value="6">Frequently mask my true self to belong</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>A bard sings of your deeds—but the tale is nothing like the truth.
+                    Does it matter?</label>
+                <select id="self_perception">
+                    <option value="1">Define myself by my own standards only</option>
+                    <option value="2">Rely mostly on personal self-assessment</option>
+                    <option value="3">Balance personal view with external feedback</option>
+                    <option value="4">Consider others' views but trust my own</option>
+                    <option value="5">Heavily influenced by others' opinions</option>
+                    <option value="6">Define myself by how others see me</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>Your most sacred values are challenged before a great audience.
+                    Do you stand firm or adapt?</label>
+                <select id="values_conflict">
+                    <option value="1">Stand fully by my values, regardless of consequence</option>
+                    <option value="2">Hold to my values even under pressure</option>
+                    <option value="3">Balance values
+                        with social acceptance</option>
+                    <option value="4">Compromise slightly for social harmony</option>
+                    <option value="5">Frequently compromise to avoid conflict</option>
+                    <option value="6">Conform completely to fit in</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Growth & Balance</h2>
+
+            <div class="question">
+                <label>A mentor
+                    offers to teach you, but it requires abandoning your current path.
+                    Do you embrace the change?</label>
+                <select id="personal_growth">
+                    <option value="1">Always push for growth and improvement</option>
+                    <option value="2">Frequently seek self-betterment</option>
+                    <option value="3">Balance growth with stability</option>
+                    <option value="4">Welcome growth occasionally</option>
+                    <option value="5">Prefer contentment over constant change</option>
+                    <option value="6">Value stability and avoid major growth efforts</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>The road ahead is long, and your companions wish to rest.
+                    Do you push on or take time to recover?</label>
+                <select id="work_balance">
+                    <option value="1">Prioritize career advancement fully</option>
+                    <option value="2">Favor work-related growth</option>
+                    <option value="3">Balance work and personal life equally</option>
+                    <option value="4">Lean towards personal well-being</option>
+                    <option value="5">Prioritize personal life over work</option>
+                    <option value="6">Fully prioritize well-being over career growth</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label>The world shifts around you, traditions crumble, and new ways arise.
+                    How do you react?</label>
+                <select id="adaptation">
+                    <option value="1">Embrace change fully and eagerly</option>
+                    <option value="2">Welcome change with little resistance</option>
+                    <option value="3">Balance change with stability</option>
+                    <option value="4">Adapt slowly but accept it</option>
+                    <option value="5">Resist most changes</option>
+                    <option value="6">Reject change to preserve stability</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="button" id="generate-btn">Generate Your Character</button>
+    </form>
+
+    <div id="result">
+        <h2>Your Character Description</h2>
+        <div id="character-description"></div>
+    </div>
+
+    <script>
+        const attributeMappings = {
+
+            "Power & Purpose": {
+                "leadership": {
+                    "attribute": "Leadership",
+                    "body_part": "background"
+                },
+                "resource": {
+                    "attribute": "Resource",
+                    "body_part": "background"
+                },
+                "risk": {
+                    "attribute": "Risk",
+                    "body_part": "claws"
+                }
+            },
+            "Wisdom & Adaptation": {
+                "decision": {
+                    "attribute": "Decision",
+                    "body_part": "head"
+                },
+                "uncertainty": {
+                    "attribute": "Uncertainty",
+                    "body_part": "tail"
+                },
+                "failure": {
+                    "attribute": "Failure",
+                    "body_part": "claws"
+                }
+            },
+            "Connection & Impact": {
+                "relationships": {
+                    "attribute": "Relationships",
+                    "body_part": "wings"
+                },
+                "influence": {
+                    "attribute": "Influence",
+                    "body_part": "wings"
+                },
+                "compassion": {
+                    "attribute": "Compassion",
+                    "body_part": "style"
+                }
+            },
+            "Action & Method": {
+                "execution": {
+"attribute": "Execution",
+                    "body_part": "head"
+                },
+                "work_ethic": {
+                    "attribute": "Work Ethic",
+                    "body_part": "tail"
+                },
+                "efficiency": {
+                    "attribute": "Efficiency",
+                    "body_part": "style"
+                }
+            },
+            "Truth & Identity": {
+                "authenticity": {
+                    "attribute": "Authenticity",
+                    "body_part": "background"
+                },
+                "self_perception": {
+                    "attribute": "Self Perception",
+                    "body_part": "claws"
+                },
+                "values_conflict": {
+                    "attribute": "Values Conflict",
+                    "body_part": "head"
+                }
+            },
+            "Growth & Balance": {
+                "personal_growth": {
+                    "attribute": "Personal Growth",
+                    "body_part": "wings"
+                },
+                "work_balance": {
+                    "attribute": "Work Balance",
+                    "body_part": "tail"
+                },
+                "adaptation": {
+                    "attribute": "Adaptation",
+                    "body_part": "style"
+                }
+            }
+        };
+
+        const visualMappings = {
+            "background": {
+                "Leadership": {
+                    "visual_range": {
+                        "1": "Imposing presence",
+                        "2": "Commanding aura",
+                        "3": "Noticeable confidence",
+                        "4": "Average build",
+                        "5": "Unassuming stature",
+                        "6": "Humble appearance"
+                    }
+                },
+                "Resource": {
+                    "visual_range": {
+                        "1": "Luxurious attire",
+                        "2": "Finely made clothing",
+                        "3": "Practical garb",
+                        "4": "Simple clothing",
+                        "5": "Modest wear",
+                        "6": "Ragged appearance"
+                    }
+                },
+                "Authenticity": {
+                    "visual_range": {
+                        "1": "Unchanging expression",
+                        "2": "Stoic demeanor",
+                        "3": "Consistent appearance",
+                        "4": "Adaptable style",
+                        "5": "Chameleon-like shifts",
+                        "6": "Constantly changing looks"
+                    }
+                }
+            },
+            "claws": {
+                "Risk": {
+                    "visual_range": {
+                        "1": "Sharp, dangerous claws",
+                        "2": "Formidable claws",
+                        "3": "Slightly pointed claws",
+                        "4": "Rounded claws",
+                        "5": "Blunt claws",
+                        "6": "No claws"
+                    }
+                },
+                "Failure": {
+                    "visual_range": {
+                        "1": "Scarred and battle-worn",
+                        "2": "Many minor injuries",
+                        "3": "Some marks or scars",
+                        "4": "Few blemishes",
+                        "5": "Well-maintained appearance",
+                        "6": "Pristine condition"
+                    }
+                },
+                "Self Perception": {
+                    "visual_range": {
+                        "1": "Proud posture",
+                        "2": "Upright stance",
+                        "3": "Balanced demeanor",
+                        "4": "Slightly self-conscious",
+                        "5": "Humble carriage",
+                        "6": "Self-effacing presence"
+                    }
+                }
+            },
+            "head": {
+                "Decision": {
+                    "visual_range": {
+                        "1": "Stern gaze",
+                        "2": "Focused expression",
+                        "3": "Thoughtful look",
+                        "4": "Curious expression",
+                        "5": "Inquisitive eyes",
+                        "6": "Unpredictable gaze"
+                    }
+                },
+                "Execution": {
+                    "visual_range": {
+                        "1": "Meticulously groomed",
+                        "2": "Well-kept features",
+                        "3": "Neat appearance",
+                        "4": "Slightly messy",
+                        "5": "Wild hair",
+                        "6": "Unkempt"
+                    }
+                },
+                "Values Conflict": {
+                    "visual_range": {
+                        "1": "Unwavering expression",
+                        "2": "Firm expression",
+                        "3": "Resolute features",
+                        "4": "Flexible features",
+                        "5": "Adaptable appearance",
+                        "6": "Highly changeable"
+                    }
+                }
+            },
+            "tail": {
+                "Uncertainty": {
+                    "visual_range": {
+                        "1": "Rigid tail",
+                        "2": "Stiff tail",
+                        "3": "Somewhat flexible tail",
+                        "4": "Flexible tail",
+                        "5": "Very flexible tail",
+                        "6": "Extremely adaptable tail"
+                    }
+                },
+                "Work Ethic": {
+                    "visual_range": {
+                        "1": "Immaculate tail",
+                        "2": "Well-cared for tail",
+                        "3": "Regularly groomed tail",
+                        "4": "Occasionally groomed tail",
+                        "5": "Slightly messy tail",
+                        "6": "Disheveled tail"
+                    }
+                },
+                "Work Balance": {
+                    "visual_range": {
+                        "1": "Unused tail",
+                        "2": "Rarely used tail",
+                        "3": "Tail used occasionally",
+                        "4": "Tail used regularly",
+                        "5": "Frequently used tail",
+                        "6": "Overused tail"
+                    }
+                }
+            },
+            "wings": {
+                "Relationships": {
+                    "visual_range": {
+                        "1": "Intricate wings",
+                        "2": "Elaborate wings",
+                        "3": "Detailed wings",
+                        "4": "Simple wings",
+                        "5": "Plain wings",
+                        "6": "Minimal wings"
+                    }
+                },
+                "Influence": {
+                    "visual_range": {
+                        "1": "Majestic wings",
+                        "2": "Impressive wings",
+                        "3": "Noticeable wings",
+                        "4": "Average wings",
+                        "5": "Small wings",
+                        "6": "Inconspicuous wings"
+                    }
+                },
+                "Personal Growth": {
+                    "visual_range": {
+                        "1": "Unchanged wings",
+                        "2": "Static wings",
+                        "3": "Wings with slight changes",
+                        "4": "Wings with some changes",
+                        "5": "Wings with frequent changes",
+                        "6": "Constantly changing wings"
+                    }
+                }
+            },
+            "style": {
+                "Compassion": {
+                    "visual_range": {
+                        "1": "Elegant style",
+                        "2": "Refined style",
+                        "3": "Balanced style",
+                        "4": "Casual style",
+                        "5": "Simple style",
+                        "6": "Unadorned style"
+                    }
+                },
+                "Efficiency": {
+                    "visual_range": {
+                        "1": "Efficient style",
+                        "2": "Practical style",
+                        "3": "Versatile style",
+                        "4": "Creative style",
+                        "5": "Expressive style",
+                        "6": "Unique style"
+                    }
+                },
+                "Adaptation": {
+                    "visual_range": {
+                        "1": "Unchanging style",
+                        "2": "Consistent style",
+                        "3": "Adaptable style",
+                        "4": "Flexible style",
+                        "5": "Highly flexible style",
+                        "6": "Extremely fluid style"
+                    }
+                }
+            }
+        };
+
+        document.getElementById("generate-btn").addEventListener("click", () => {
+            const formElements = document.getElementById("char-form").elements;
+            const result = {};
+
+            // Gather user input
+            for (const section in attributeMappings) {
+                for (const key in attributeMappings[section]) {
+                    const selectElement = formElements[key];
+                    if (!selectElement) continue;
+                    const value = selectElement.value;
+                    const attribute = attributeMappings[section][key].attribute;
+                    const bodyParts = attributeMappings[section][key].body_part;
+
+                    // Ensure array for bodyParts
+                    const parts = Array.isArray(bodyParts) ? bodyParts : [bodyParts];
+
+                    parts.forEach((part) => {
+                        if (!result[part]) result[part] = [];
+                        const visuals = visualMappings[part]?.[attribute]?.visual_range?.[value];
+                        if (visuals) {
+                            result[part].push(`${attribute}: ${visuals}`);
+                        }
+                    });
+                }
+            }
+
+            // Display character description
+            const descriptionBox = document.getElementById("character-description");
+            let output = "";
+
+            for (const part in result) {
+                output += `\n🧩 ${part.charAt(0).toUpperCase() + part.slice(1)}:\n`;
+                result[part].forEach((desc) => {
+                    output += `- ${desc}\n`;
+                });
+            }
+
+            descriptionBox.textContent = output.trim();
+            document.getElementById("result").style.display = "block";
+
+            // Populate the table
+            populateBodyPartTable(result);
+        });
+
+        function populateBodyPartTable(result) {
+            const table = document.createElement('table');
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Body Part</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+            const tbody = table.querySelector('tbody');
+
+            for (const part in result) {
+                const row = document.createElement('tr');
+                const partCell = document.createElement('td');
+                partCell.textContent = part.charAt(0).toUpperCase() + part.slice(1);
+                row.appendChild(partCell);
+
+                const descCell = document.createElement('td');
+                descCell.textContent = result[part].join(', '); // Join descriptions with a comma
+                row.appendChild(descCell);
+
+                tbody.appendChild(row);
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.appendChild(table);
+        }
+    </script>
+</body>
+
+</html>
