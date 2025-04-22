@@ -104,11 +104,71 @@
             background-color: #f2f2f2;
         }
     </style>
+<link rel="stylesheet" href="windows95.css">
 </head>
 
 <body>
-    <h1>Fantasy Character Creator</h1>
-    <p style="text-align: center;">Answer the questions below to reveal your unique fantasy creature.</p>
+
+ <div class="page-container">
+        <!-- Left Ad Banner -->
+        <div class="ad-left">
+            <div class="ad-title">ARCSTRIDER</div>
+            <div class="ad-image-container">
+                <img src="path-to-your-arcstrider-image.jpg" alt="Arcstrider">
+            </div>
+            <span class="ad-badge">HOT!</span>
+            <p class="flashing-text">Check it out now!</p>
+            <a href="#" class="visit-button">VISIT SITE</a>
+            <div class="counter">Visitors: 12,345</div>
+        </div>
+
+ <div class="main-content">
+            <h1>Fantasy Generator</h1>
+            <p style="text-align: center;">Choose what you want to generate and answer the questions to reveal your unique fantasy creation.</p>
+
+            <div class="section">
+                <h2>What are you looking for?</h2>
+                <div class="question">
+                    <select id="generator-type">
+                        <option value="character">Character prompt</option>
+                        <option value="creature">Creature prompt</option>
+                        <option value="environment">Environment prompt</option>
+                    </select>
+                </div>
+            </div>
+<h1>The Arcstrider Presents</h1>
+    <h2>Fiction Factory</h2>
+    <p style="text-align: center;"> <h1>〚 The Arcstrider’s Fiction Factory 〛</h1><br><br>
+Recovered from the data-ashes of the First Epoch.<br><br>
+Believed to be one of the earliest artifacts connected to the Legacy Engine.<br><br>
+
+"In the Time Before Narrative, before structure, before the great Binding of Tropes… there walked the Arcstrider.<br><br>
+A traveler of thought. A witness of fiction. A builder of beasts."<br><br>
+
+Herein lies a relic — a minor instrument forged from the immense power of the Legacy System.<br><br>
+Though humble in form, its function is divine: to conjure character from choice, essence from answer, form from fragments of the psyche.<br><br>
+
+Answer the questions — not as you are, but as the one you could become.<br><br>
+Generate the prompts — echoes of what was, reflections of what could be.<br><br>
+Reveal the image — your creation, your creature, your story made flesh.<br><br>
+
+From these elements, a form will arise.<br><br>
+A presence.<br><br>
+A myth.<br><br>
+<br><br>
+What challenging task awaits you?<br><br>
+<br><br>And what will they say about you… <br><br>when the pixels settle...<br><br> and the tale is told?</p>
+
+    <div class="section">
+        <h2>What are you looking for?</h2>
+        <div class="question">
+            <select id="generator-type">
+                <option value="character">Character prompt</option>
+                <option value="creature">Creature prompt</option>
+                <option value="environment">Environment prompt</option>
+            </select>
+        </div>
+    </div>
 
     <form id="char-form">
         <div class="section">
@@ -373,372 +433,360 @@
             </div>
         </div>
 
-        <button type="button" id="generate-btn">Generate Your Character</button>
+        <button type="button" onclick="randomFill()">Random Fill</button>
+        <button type="button" id="generate-btn">Generate Your Creation</button>
     </form>
 
+<div class="container">
+<div class="ad-right">
+            <div class="ad-title">FICTION FIGHTS</div>
+            <div class="ad-image-container">
+                <img src="path-to-your-fiction-fights-image.jpg" alt="Fiction Fights">
+            </div>
+            <span class="ad-badge">NEW!</span>
+            <p class="flashing-text">Join the battle!</p>
+            <a href="#" class="visit-button">CLICK HERE</a>
+            <div class="counter">Players online: 784</div>
+        </div>
+</div>
+    </div>
     <div id="result">
-        <h2>Your Character Description</h2>
+        <h2 id="result-title">Your Fantasy Creation</h2>
         <div id="character-description"></div>
     </div>
 
     <script>
-        const attributeMappings = {
-
-            "Power & Purpose": {
-                "leadership": {
-                    "attribute": "Leadership",
-                    "body_part": "background"
-                },
-                "resource": {
-                    "attribute": "Resource",
-                    "body_part": "background"
-                },
-                "risk": {
-                    "attribute": "Risk",
-                    "body_part": "claws"
-                }
-            },
-            "Wisdom & Adaptation": {
-                "decision": {
-                    "attribute": "Decision",
-                    "body_part": "head"
-                },
-                "uncertainty": {
-                    "attribute": "Uncertainty",
-                    "body_part": "tail"
-                },
-                "failure": {
-                    "attribute": "Failure",
-                    "body_part": "claws"
-                }
-            },
-            "Connection & Impact": {
-                "relationships": {
-                    "attribute": "Relationships",
-                    "body_part": "wings"
-                },
-                "influence": {
-                    "attribute": "Influence",
-                    "body_part": "wings"
-                },
-                "compassion": {
-                    "attribute": "Compassion",
-                    "body_part": "style"
-                }
-            },
-            "Action & Method": {
-                "execution": {
-"attribute": "Execution",
-                    "body_part": "head"
-                },
-                "work_ethic": {
-                    "attribute": "Work Ethic",
-                    "body_part": "tail"
-                },
-                "efficiency": {
-                    "attribute": "Efficiency",
-                    "body_part": "style"
-                }
-            },
-            "Truth & Identity": {
-                "authenticity": {
-                    "attribute": "Authenticity",
-                    "body_part": "background"
-                },
-                "self_perception": {
-                    "attribute": "Self Perception",
-                    "body_part": "claws"
-                },
-                "values_conflict": {
-                    "attribute": "Values Conflict",
-                    "body_part": "head"
-                }
-            },
-            "Growth & Balance": {
-                "personal_growth": {
-                    "attribute": "Personal Growth",
-                    "body_part": "wings"
-                },
-                "work_balance": {
-                    "attribute": "Work Balance",
-                    "body_part": "tail"
-                },
-                "adaptation": {
-                    "attribute": "Adaptation",
-                    "body_part": "style"
-                }
-            }
+        // Character Data
+        const characterData = {
+            "head": [
+                "Worn leather coif",
+                "Iron helm with nasal guard",
+                "Hood pulled low",
+                "Steel sallet, visor up",
+                "Bronze circlet with etched runes",
+                "Cloth headwrap, bandana-style"
+            ],
+            "eyes": [
+                "Sharp, alert eyes",
+                "Calm, watchful gaze",
+                "Eyes with faint glint of magic",
+                "Hawk-like eyes",
+                "Piercing blue eyes",
+                "Kind, unassuming eyes"
+            ],
+            "arms": [
+                "Bracers of boiled leather",
+                "Simple linen wraps",
+                "Armguard and shortbow string marks",
+                "Rolled-up sleeves, calloused hands",
+                "One gauntlet, one bare",
+                "Sleeves torn at the elbow"
+            ],
+            "torso": [
+                "Padded gambeson",
+                "Chainmail shirt",
+                "Reinforced jerkin",
+                "Leather cuirass with metal studs",
+                "Doublet beneath a travel-worn cloak",
+                "Tattered tabard over scale mail"
+            ],
+            "legs": [
+                "Woolen trousers with patches",
+                "Greaves strapped over boots",
+                "Quilted pants with travel stains",
+                "Canvas breeches, muddy",
+                "Soft leather pants, knee guards",
+                "Sturdy boots and leggings"
+            ],
+            "wings_tail": [
+                "No wings or tail",
+                "Tattered cloak like a tail",
+                "Short, furred tail (beastfolk?)",
+                "Long cloak flows like wings",
+                "None",
+                "Tail wrapped in cloth (for balance)"
+            ]
         };
 
-        const visualMappings = {
-            "background": {
-                "Leadership": {
-                    "visual_range": {
-                        "1": "Imposing presence",
-                        "2": "Commanding aura",
-                        "3": "Noticeable confidence",
-                        "4": "Average build",
-                        "5": "Unassuming stature",
-                        "6": "Humble appearance"
-                    }
-                },
-                "Resource": {
-                    "visual_range": {
-                        "1": "Luxurious attire",
-                        "2": "Finely made clothing",
-                        "3": "Practical garb",
-                        "4": "Simple clothing",
-                        "5": "Modest wear",
-                        "6": "Ragged appearance"
-                    }
-                },
-                "Authenticity": {
-                    "visual_range": {
-                        "1": "Unchanging expression",
-                        "2": "Stoic demeanor",
-                        "3": "Consistent appearance",
-                        "4": "Adaptable style",
-                        "5": "Chameleon-like shifts",
-                        "6": "Constantly changing looks"
-                    }
-                }
-            },
-            "claws": {
-                "Risk": {
-                    "visual_range": {
-                        "1": "Sharp, dangerous claws",
-                        "2": "Formidable claws",
-                        "3": "Slightly pointed claws",
-                        "4": "Rounded claws",
-                        "5": "Blunt claws",
-                        "6": "No claws"
-                    }
-                },
-                "Failure": {
-                    "visual_range": {
-                        "1": "Scarred and battle-worn",
-                        "2": "Many minor injuries",
-                        "3": "Some marks or scars",
-                        "4": "Few blemishes",
-                        "5": "Well-maintained appearance",
-                        "6": "Pristine condition"
-                    }
-                },
-                "Self Perception": {
-                    "visual_range": {
-                        "1": "Proud posture",
-                        "2": "Upright stance",
-                        "3": "Balanced demeanor",
-                        "4": "Slightly self-conscious",
-                        "5": "Humble carriage",
-                        "6": "Self-effacing presence"
-                    }
-                }
-            },
-            "head": {
-                "Decision": {
-                    "visual_range": {
-                        "1": "Stern gaze",
-                        "2": "Focused expression",
-                        "3": "Thoughtful look",
-                        "4": "Curious expression",
-                        "5": "Inquisitive eyes",
-                        "6": "Unpredictable gaze"
-                    }
-                },
-                "Execution": {
-                    "visual_range": {
-                        "1": "Meticulously groomed",
-                        "2": "Well-kept features",
-                        "3": "Neat appearance",
-                        "4": "Slightly messy",
-                        "5": "Wild hair",
-                        "6": "Unkempt"
-                    }
-                },
-                "Values Conflict": {
-                    "visual_range": {
-                        "1": "Unwavering expression",
-                        "2": "Firm expression",
-                        "3": "Resolute features",
-                        "4": "Flexible features",
-                        "5": "Adaptable appearance",
-                        "6": "Highly changeable"
-                    }
-                }
-            },
-            "tail": {
-                "Uncertainty": {
-                    "visual_range": {
-                        "1": "Rigid tail",
-                        "2": "Stiff tail",
-                        "3": "Somewhat flexible tail",
-                        "4": "Flexible tail",
-                        "5": "Very flexible tail",
-                        "6": "Extremely adaptable tail"
-                    }
-                },
-                "Work Ethic": {
-                    "visual_range": {
-                        "1": "Immaculate tail",
-                        "2": "Well-cared for tail",
-                        "3": "Regularly groomed tail",
-                        "4": "Occasionally groomed tail",
-                        "5": "Slightly messy tail",
-                        "6": "Disheveled tail"
-                    }
-                },
-                "Work Balance": {
-                    "visual_range": {
-                        "1": "Unused tail",
-                        "2": "Rarely used tail",
-                        "3": "Tail used occasionally",
-                        "4": "Tail used regularly",
-                        "5": "Frequently used tail",
-                        "6": "Overused tail"
-                    }
-                }
-            },
-            "wings": {
-                "Relationships": {
-                    "visual_range": {
-                        "1": "Intricate wings",
-                        "2": "Elaborate wings",
-                        "3": "Detailed wings",
-                        "4": "Simple wings",
-                        "5": "Plain wings",
-                        "6": "Minimal wings"
-                    }
-                },
-                "Influence": {
-                    "visual_range": {
-                        "1": "Majestic wings",
-                        "2": "Impressive wings",
-                        "3": "Noticeable wings",
-                        "4": "Average wings",
-                        "5": "Small wings",
-                        "6": "Inconspicuous wings"
-                    }
-                },
-                "Personal Growth": {
-                    "visual_range": {
-                        "1": "Unchanged wings",
-                        "2": "Static wings",
-                        "3": "Wings with slight changes",
-                        "4": "Wings with some changes",
-                        "5": "Wings with frequent changes",
-                        "6": "Constantly changing wings"
-                    }
-                }
-            },
-            "style": {
-                "Compassion": {
-                    "visual_range": {
-                        "1": "Elegant style",
-                        "2": "Refined style",
-                        "3": "Balanced style",
-                        "4": "Casual style",
-                        "5": "Simple style",
-                        "6": "Unadorned style"
-                    }
-                },
-                "Efficiency": {
-                    "visual_range": {
-                        "1": "Efficient style",
-                        "2": "Practical style",
-                        "3": "Versatile style",
-                        "4": "Creative style",
-                        "5": "Expressive style",
-                        "6": "Unique style"
-                    }
-                },
-                "Adaptation": {
-                    "visual_range": {
-                        "1": "Unchanging style",
-                        "2": "Consistent style",
-                        "3": "Adaptable style",
-                        "4": "Flexible style",
-                        "5": "Highly flexible style",
-                        "6": "Extremely fluid style"
-                    }
-                }
-            }
+        // Creature Data
+        const creatureData = {
+            "head": [
+                "Helmet fused to skull",
+                "Third eye on the forehead",
+                "Beaked",
+                "Long Tongue",
+                "Horns like a ram's",
+                "Teeth like shark fangs"
+            ],
+            "eyes": [
+                "crosseyed",
+                "Catlike eyes",
+                "four-eyes in a ring (glasses? ...or?)",
+                "Fly's compound lenses",
+                "Eyes glowing ember-orange",
+                "Mismatched eyes"
+            ],
+            "arms": [
+                "Arms covered in tattoos",
+                "One hand skeletal, one fleshy",
+                "Fingers ending in quills",
+                "Extra arms from shoulders",
+                "One arm with a weapon in place of a hand",
+                "Shimmering metal fingertip Claws"
+            ],
+            "torso": [
+                "Chest plated in stone",
+                "Glowing sigil set in sternum",
+                "Transparent chest with inner fire",
+                "Spine ridged like a stegosaurus",
+                "Crystal shards embedded in shoulder",
+                "Bone harness fused to body"
+            ],
+            "legs": [
+                "Glowing circuitry inside legs",
+                "One leg mechanical",
+                "Hooved feet with etched glyphs",
+                "Vines spiraling up the thighs",
+                "Feet with six clawed toes",
+                "Ankles in rusted shackles"
+            ],
+            "wings_tail": [
+                "Wings made of torn banners",
+                "Tail like a serpent",
+                "Dragonfly wings",
+                "Thorned vine tendrils from back",
+                "Tail of shadow",
+                "Nothing Special"
+            ]
         };
+
+        // Environment Data
+        const environmentData = {
+            "foreground": [
+                "Ancient cobblestone path",
+                "Winding dirt trail",
+                "Scattered ruins",
+                "Market stalls, abandoned",
+                "Fallen statue, overgrown",
+                "Rocky outcropping"
+            ],
+            "structures": [
+                "Crumbling stone tower",
+                "Wooden bridge over ravine",
+                "Thatched cottage with smoke",
+                "Castle battlements",
+                "Cliffside monastery",
+                "Stone archway, ivy-covered"
+            ],
+            "vegetation": [
+                "Gnarled oak trees",
+                "Mushroom circle",
+                "Twisted vines and flowers",
+                "Giant ferns and moss",
+                "Phosphorescent fungi",
+                "Wild berry bushes"
+            ],
+            "weather": [
+                "Storm clouds gathering",
+                "Golden sunset",
+                "Stars unusually bright",
+                "Heavy fog rolling in",
+                "Aurora in the sky",
+                "Double moons visible"
+            ],
+            "water": [
+                "Misty waterfall",
+                "Bubbling brook",
+                "Sacred hot spring",
+                "Still lake reflecting sky",
+                "Flooded ancient temple",
+                "River crossing with stepping stones"
+            ],
+            "mystical": [
+                "Floating crystal shards",
+                "Portal with swirling energy",
+                "Rune-marked standing stones",
+                "Wisps of colored light",
+                "Whispering spirit trees",
+                "Time-frozen objects"
+            ]
+        };
+
+        function randomFill() {
+            const form = document.getElementById("char-form");
+            const groups = {};
+
+            // Handle radio buttons
+            form.querySelectorAll('input[type="radio"]').forEach(input => {
+                if (!groups[input.name]) groups[input.name] = [];
+                groups[input.name].push(input);
+            });
+
+            Object.values(groups).forEach(inputs => {
+                const random = Math.floor(Math.random() * inputs.length);
+                inputs[random].checked = true;
+            });
+
+            // Handle dropdowns (select elements)
+            form.querySelectorAll('select').forEach(select => {
+                const options = select.options;
+                const randomIndex = Math.floor(Math.random() * options.length);
+                select.selectedIndex = randomIndex;
+            });
+        }
 
         document.getElementById("generate-btn").addEventListener("click", () => {
+            const generatorType = document.getElementById("generator-type").value;
             const formElements = document.getElementById("char-form").elements;
-            const result = {};
-
-            // Gather user input
-            for (const section in attributeMappings) {
-                for (const key in attributeMappings[section]) {
-                    const selectElement = formElements[key];
-                    if (!selectElement) continue;
-                    const value = selectElement.value;
-                    const attribute = attributeMappings[section][key].attribute;
-                    const bodyParts = attributeMappings[section][key].body_part;
-
-                    // Ensure array for bodyParts
-                    const parts = Array.isArray(bodyParts) ? bodyParts : [bodyParts];
-
-                    parts.forEach((part) => {
-                        if (!result[part]) result[part] = [];
-                        const visuals = visualMappings[part]?.[attribute]?.visual_range?.[value];
-                        if (visuals) {
-                            result[part].push(`${attribute}: ${visuals}`);
-                        }
-                    });
+            
+            // Get all the values from the questionnaire
+            const values = {};
+            for (let i = 0; i < formElements.length; i++) {
+                if (formElements[i].tagName === "SELECT" && formElements[i].id !== "generator-type") {
+                    values[formElements[i].id] = formElements[i].value;
                 }
             }
-
-            // Display character description
-            const descriptionBox = document.getElementById("character-description");
-            let output = "";
-
-            for (const part in result) {
-                output += `\n🧩 ${part.charAt(0).toUpperCase() + part.slice(1)}:\n`;
-                result[part].forEach((desc) => {
-                    output += `- ${desc}\n`;
-                });
+            
+            // Calculate weighted average of answers to determine which element to pick from each category
+            const elementIndices = {};
+            
+            // This is a simplified approach, just using 5 representative questions to determine indices
+            const questionGroups = [
+                ["leadership", "resource", "risk"], // For first element
+                ["decision", "uncertainty", "failure"], // For second element
+                ["relationships", "influence", "compassion"], // For third element
+                ["execution", "work_ethic", "efficiency"], // For fourth element
+                ["authenticity", "self_perception", "values_conflict"], // For fifth element
+                ["personal_growth", "work_balance", "adaptation"] // For sixth element
+            ];
+            
+            // Calculate indices for each element
+            for (let i = 0; i < questionGroups.length; i++) {
+                let sum = 0;
+                let count = 0;
+                
+                for (const question of questionGroups[i]) {
+                    if (values[question]) {
+                        sum += parseInt(values[question]);
+                        count++;
+                    }
+                }
+                
+                // Get the average and round to nearest integer (1-6)
+                let index = Math.round(sum / count) - 1;
+                if (index < 0) index = 0;
+                if (index > 5) index = 5;
+                
+                elementIndices[i] = index;
             }
-
-            descriptionBox.textContent = output.trim();
+            
+            // Generate the description based on the generator type
+            let description = "";
+            let resultTitle = "";
+            let tableData = {};
+            
+            if (generatorType === "character") {
+                resultTitle = "Your Character Description";
+                tableData = {
+                    "Head": characterData.head[elementIndices[0]],
+                    "Eyes": characterData.eyes[elementIndices[1]],
+                    "Arms": characterData.arms[elementIndices[2]],
+                    "Torso": characterData.torso[elementIndices[3]],
+                    "Legs": characterData.legs[elementIndices[4]],
+                    "Wings/Tail": characterData.wings_tail[elementIndices[5]]
+                };
+            } else if (generatorType === "creature") {
+                resultTitle = "Your Creature Description";
+                tableData = {
+                    "Head": creatureData.head[elementIndices[0]],
+                    "Eyes": creatureData.eyes[elementIndices[1]],
+                    "Arms": creatureData.arms[elementIndices[2]],
+                    "Torso": creatureData.torso[elementIndices[3]],
+                    "Legs": creatureData.legs[elementIndices[4]],
+                    "Wings/Tail": creatureData.wings_tail[elementIndices[5]]
+                };
+            } else if (generatorType === "environment") {
+                resultTitle = "Your Environment Description";
+                tableData = {
+                    "Foreground/Path": environmentData.foreground[elementIndices[0]],
+                    "Structures": environmentData.structures[elementIndices[1]],
+                    "Vegetation": environmentData.vegetation[elementIndices[2]],
+                    "Weather/Sky": environmentData.weather[elementIndices[3]],
+                    "Water Feature": environmentData.water[elementIndices[4]],
+                    "Mystical Element": environmentData.mystical[elementIndices[5]]
+                };
+            }
+            
+            // Format the description
+            for (const category in tableData) {
+                description += `\n🧩 ${category}:\n`;
+                description += `- ${tableData[category]}\n`;
+            }
+            
+            // Update the result display
+            document.getElementById("result-title").textContent = resultTitle;
+            document.getElementById("character-description").textContent = description.trim();
             document.getElementById("result").style.display = "block";
-
-            // Populate the table
-            populateBodyPartTable(result);
-        });
-
-        function populateBodyPartTable(result) {
+            
+            // Remove any existing table and create a new one
+            const existingTable = document.querySelector("#result table");
+            if (existingTable) {
+                existingTable.remove();
+            }
+            
+            // Create and populate the new table
             const table = document.createElement('table');
             table.innerHTML = `
                 <thead>
                     <tr>
-                        <th>Body Part</th>
+                        <th>Category</th>
                         <th>Description</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             `;
             const tbody = table.querySelector('tbody');
-
-            for (const part in result) {
+            
+            for (const category in tableData) {
                 const row = document.createElement('tr');
-                const partCell = document.createElement('td');
-                partCell.textContent = part.charAt(0).toUpperCase() + part.slice(1);
-                row.appendChild(partCell);
-
+                const categoryCell = document.createElement('td');
+                categoryCell.textContent = category;
+                row.appendChild(categoryCell);
+                
                 const descCell = document.createElement('td');
-                descCell.textContent = result[part].join(', '); // Join descriptions with a comma
+                descCell.textContent = tableData[category];
                 row.appendChild(descCell);
-
+                
                 tbody.appendChild(row);
             }
-
-            const resultDiv = document.getElementById('result');
-            resultDiv.appendChild(table);
-        }
+            
+            document.getElementById("result").appendChild(table);
+        });
     </script>
+<div class="container">
+<div class="ad-right">
+            <div class="ad-title">FICTION FIGHTS</div>
+            <div class="ad-image-container">
+                <img src="path-to-your-fiction-fights-image.jpg" alt="Fiction Fights">
+            </div>
+            <span class="ad-badge">NEW!</span>
+            <p class="flashing-text">Join the battle!</p>
+            <a href="#" class="visit-button">CLICK HERE</a>
+            <div class="counter">Players online: 784</div>
+        </div>
+    </div>
+</div>
+
+
 </body>
+<footer>
+  © 2025 Lance West. All rights reserved.
+
+This tool is provided for personal, non-commercial use only.
+You may not copy, modify, distribute, or reverse-engineer any part of the code or interface without explicit written permission from the author.
+
+The source code is proprietary and not publicly available. By using this tool, you agree to these terms.
+
+</footer>
 
 </html>
